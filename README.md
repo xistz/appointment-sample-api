@@ -16,6 +16,7 @@
 
 ## Tools
 
+- Ruby 2.7.1
 - Rails 6
 - MySQL 5.7
 - Docker

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      target: development
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/api
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: schedule_decelopment
+      MYSQL_USER: mf
+      MYSQL_PASSWORD: password
