@@ -1,23 +1,24 @@
-# Recruitment Test
+# README
 
-## Requirements
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-- ユーザーおよび FP を登録出来るようにしてください。
-- 指定したユーザーまたは FP でログインおよびログアウトできるようにしてください。パスワードなどを用いた認証機能はなくても構いません。
-- 予約は一枠 30 分とします。
-- 平日の予約枠は 10:00~18:00 までの毎時 00 分および 30 分からスタートするものとします。
+Things you may want to cover:
 
-  - 最初の枠は 10:00~10:30、次の枠は 10:30~11:00、最後の枠は 17:30~18:00 です。
+* Ruby version
 
-- 土曜日の予約枠は 11:00~15:00 とします。
-- 日曜日は休業日とします。
-- FP が予約を受け付ける枠を選択できるようにしてください。
-- ユーザーが、FP の空いている枠を予約できるようにしてください。
+* System dependencies
 
-## Tools
+* Configuration
 
-- Ruby 2.7.1
-- Rails 6
-- MySQL 5.7
-- Docker
-- Docker Compose
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
