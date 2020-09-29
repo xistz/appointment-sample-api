@@ -11,10 +11,9 @@ jobs:
 
     env:
       RAILS_ENV: test
-      MYSQL_HOST: localhost
 
     services:
-      mysql:
+      db:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
