@@ -1,0 +1,41 @@
+name: mf-appointment-api deploy workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: appointment_test
+          MYSQL_USER: appointment
+          MYSQL_PASSWORD: u8CY3NI39JN0HNaP
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Setup db
+        run: bundle exec rails db:setup
+
+      - name: Test
+        run: bundle exec rspec --format=documentation
