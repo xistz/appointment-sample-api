@@ -22,6 +22,7 @@ services:
       - .docker/.env.development
     volumes:
       - appointment_mysql_data:/var/lib/mysql
+      - .docker/services/db:/docker-entrypoint-initdb.d
 
 volumes:
   appointment_mysql_data:
