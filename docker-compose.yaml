@@ -12,14 +12,15 @@ services:
       - .:/api
     depends_on:
       - db
-    env_file:
-      - .docker/.env.development
     command: bundle exec puma -C config/puma.rb
   db:
     image: mysql:5.7
     restart: always
-    env_file:
-      - .docker/.env.development
+    environment:
+      MYSQL_ROOT_PASSWORD: hx71kCBHq2Pg1KeC
+      MYSQL_DATABASE: appointment_development
+      MYSQL_USER: appointment
+      MYSQL_PASSWORD: u8CY3NI39JN0HNaP
     volumes:
       - appointment_mysql_data:/var/lib/mysql
       - .docker/services/db:/docker-entrypoint-initdb.d

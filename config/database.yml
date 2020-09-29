@@ -17,7 +17,7 @@ default: &default
 development: &development
   <<: *default
   username: appointment
-  password: <%= ENV['MYSQL_PASSWORD'] %>
+  password: u8CY3NI39JN0HNaP
   host: db
   database: appointment_development
 

@@ -12,7 +12,6 @@ jobs:
     env:
       RAILS_ENV: test
       MYSQL_HOST: 127.0.0.1
-      MYSQL_PASSWORD: u8CY3NI39JN0HNaP
 
     services:
       db:
