@@ -11,6 +11,7 @@ jobs:
 
     env:
       RAILS_ENV: test
+      MYSQL_HOST: '127.0.0.1'
 
     services:
       db:
@@ -21,7 +22,7 @@ jobs:
           MYSQL_USER: appointment
           MYSQL_PASSWORD: u8CY3NI39JN0HNaP
         ports:
-          - 3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
