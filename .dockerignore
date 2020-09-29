@@ -1,0 +1,14 @@
+/.docker
+/.github
+
+/.git
+.gitignore
+
+.dockerignore
+Dockerfile
+docker-compose.yaml
+
+/spec
+.rspec
+.ruby-version
+README.md
