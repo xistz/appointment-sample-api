@@ -5,15 +5,27 @@ services:
     build:
       context: .
       target: development
+    tty: true
     ports:
       - 3000:3000
     volumes:
       - .:/api
+    depends_on:
+      - db
+    env_file:
+      - .docker/.env.development
+    command: bundle exec puma -C config/puma.rb
   db:
     image: mysql:5.7
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: schedule_decelopment
-      MYSQL_USER: mf
-      MYSQL_PASSWORD: password
+    env_file:
+      - .docker/.env.development
+    volumes:
+      - appointment_mysql_data:/var/lib/mysql
+
+volumes:
+  appointment_mysql_data:
+    driver_opts:
+      type: none
+      device: ${PWD}/.docker/volumes/db
+      o: bind
