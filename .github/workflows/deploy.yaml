@@ -48,7 +48,7 @@ jobs:
     container:
       image: xistz/mf-appointment-api:development
       volumes:
-        - $GITHUB_WORKSPACE:/api
+        - ${{ env.GITHUB_WORKSPACE }}:/api
 
     env:
       RAILS_ENV: test
