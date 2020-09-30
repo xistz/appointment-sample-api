@@ -48,11 +48,10 @@ jobs:
     container:
       image: xistz/mf-appointment-api:development
       volumes:
-        - .:/api
+        - $GITHUB_WORKSPACE:/api
 
     env:
       RAILS_ENV: test
-      MYSQL_HOST: 127.0.0.1
 
     services:
       db:
