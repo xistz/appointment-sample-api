@@ -1,7 +1,7 @@
-class HealthCheckController < ApplicationController
+class PingController < ApplicationController
   def index
     @response = {
-      status: "UP"
+      message: "pong"
     }
 
     render json: @response
