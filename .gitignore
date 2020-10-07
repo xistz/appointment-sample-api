@@ -29,3 +29,5 @@
 # Ignore db development volume
 /.docker/volumes/db/*
 !/.docker/volumes/db/.gitkeep
+.docker/services/api/.env.*
+!.docker/services/api/.env.sample
