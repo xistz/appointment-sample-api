@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'uri'
 
 class JsonWebToken
   def self.verify(token)
-    auth_payload, _ = JWT.decode(token, nil,
-               true, # Verify the signature of this token
-               algorithm: 'RS256',
-               iss: "https://#{ENV['AUTH0_DOMAIN']}/",
-               verify_iss: true,
-               aud: ENV['AUTH0_AUDIENCE'],
-               verify_aud: true) do |header|
+    auth_payload, = JWT.decode(token, nil,
+                               true, # Verify the signature of this token
+                               algorithm: 'RS256',
+                               iss: "https://#{ENV['AUTH0_DOMAIN']}/",
+                               verify_iss: true,
+                               aud: ENV['AUTH0_AUDIENCE'],
+                               verify_aud: true) do |header|
       jwks_hash[header['kid']]
     end
 
-    return auth_payload["sub"], auth_payload["#{ENV['AUTH0_NAMESPACE']}/roles"]
+    [auth_payload['sub'], auth_payload["#{ENV['AUTH0_NAMESPACE']}/roles"]]
   end
 
   def self.jwks_hash
