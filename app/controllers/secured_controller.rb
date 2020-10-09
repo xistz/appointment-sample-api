@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# SecuredController define base controller for private routes
 class SecuredController < ApplicationController
   before_action :authorize_request
 
