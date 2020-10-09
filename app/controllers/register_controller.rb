@@ -3,7 +3,7 @@
 class RegisterController < SecuredController
   before_action :is_new_user
 
-  def new
+  def create
     role = new_params[:role]
 
     UserService::Register.call(@user_id, role)
