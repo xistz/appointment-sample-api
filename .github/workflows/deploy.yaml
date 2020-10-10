@@ -1,4 +1,4 @@
-name: mf-appointment-api deploy workflow
+name: appointment-sample-api workflow
 on:
   push:
     branches:
