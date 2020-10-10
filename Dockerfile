@@ -43,4 +43,4 @@ USER appointment
 
 WORKDIR /api
 
-CMD [ "bundle", "exec", "puma", "-C", "config/puma.rb" ]
+ENTRYPOINT  [ "bundle", "exec", "puma", "-C", "config/puma.rb" ]
