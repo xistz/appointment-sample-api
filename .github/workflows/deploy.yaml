@@ -121,3 +121,15 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release -a appointment-sample-api web
+
+  migrate:
+    name: Migrate db
+    runs-on: ubuntu-latest
+    needs:
+      - release
+
+    steps:
+      - name: Migrate
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku run -a appointment-sample-api bundle exec db:migrate RAILS_ENV=production
