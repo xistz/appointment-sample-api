@@ -117,7 +117,7 @@ jobs:
       - build-deploy
 
     steps:
-      - name: Login to heroku container registry
+      - name: Release
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release -a appointment-sample-api web
