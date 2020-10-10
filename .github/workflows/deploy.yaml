@@ -132,4 +132,6 @@ jobs:
       - name: Migrate
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku run -a appointment-sample-api bundle exec db:migrate RAILS_ENV=production
+        run: |
+          heroku  run -a appointment-sample-api \
+                  bundle exec rails db:migrate RAILS_ENV=production
