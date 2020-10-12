@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module AvailabilityService
-  class Create < ApplicationService
-    def initialize(user_id, from)
+  class Create
+    def initialize(user_id:, from:)
       @user_id = user_id
       @from = from
     end
 
-    def call
+    def execute
       is_valid
 
       availability = Availability.create!(user_id: @user_id, from: @from)

@@ -13,7 +13,7 @@ class AvailabilitiesController < SecuredController
   def create
     from = DateTime.parse(create_params[:from])
 
-    id = AvailabilityService::Create.call(@user_id, from)
+    id = AvailabilityService::Create.new(user_id: dummy_id, from: from).execute
 
     response = {
       id: id,
@@ -34,7 +34,7 @@ class AvailabilitiesController < SecuredController
     @availability.destroy
 
     response = {
-      message: "deleted availability"
+      message: 'deleted availability'
     }
 
     render json: response
