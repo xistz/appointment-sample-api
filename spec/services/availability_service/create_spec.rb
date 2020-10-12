@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Availability, type: :model do
+RSpec.describe AvailabilityService::Create, type: :model do
   dummy_id = 'dummy_id'
 
   it 'returns error when it is a sunday' do
