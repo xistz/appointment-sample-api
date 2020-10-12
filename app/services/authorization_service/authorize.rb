@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module AuthorizationService
-  class Authorize < ApplicationService
-    def initialize(headers = {})
+  class Authorize
+    def initialize(headers:)
       @headers = headers
     end
 
-    def call
+    def execute
       user_id, user_roles = verify_token
 
       [user_id, user_roles]

@@ -6,7 +6,7 @@ class SecuredController < ApplicationController
   private
 
   def authorize_request
-    @user_id, @user_roles = AuthorizationService::Authorize.call(request.headers)
+    @user_id, @user_roles = AuthorizationService::Authorize.new(headers: request.headers).execute
   rescue JWT::VerificationError, JWT::DecodeError
     render json: { message: 'not authorized' }, status: :unauthorized
   end
