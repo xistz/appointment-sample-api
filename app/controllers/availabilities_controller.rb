@@ -4,16 +4,19 @@ class AvailabilitiesController < SecuredController
 
   # GET /availabilities
   def index
-    @availabilities = Availability.all
+    from = DateTime.parse(index_params[:from])
+    to = DateTime.parse(index_params[:to])
 
-    render json: @availabilities
+    availabilities = AvailabilityService::List.new(user_id: @user_id, from: from, to: to).execute
+
+    render json: AvailabilitySerializer.new(availabilities).serializable_hash
   end
 
   # POST /availabilities
   def create
     from = DateTime.parse(create_params[:from])
 
-    id = AvailabilityService::Create.new(user_id: dummy_id, from: from).execute
+    id = AvailabilityService::Create.new(user_id: @user_id, from: from).execute
 
     response = {
       id: id,
@@ -50,6 +53,10 @@ class AvailabilitiesController < SecuredController
   # Only allow a trusted parameter "white list" through.
   def create_params
     params.require(:availability).permit(:from)
+  end
+
+  def index_params
+    params.permit(:from, :to)
   end
 
   def is_financial_planner
