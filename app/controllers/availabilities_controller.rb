@@ -1,5 +1,4 @@
 class AvailabilitiesController < SecuredController
-  # before_action :set_availability, only: [:destroy]
   before_action :is_financial_planner, only: [:create]
 
   # GET /availabilities
@@ -34,21 +33,24 @@ class AvailabilitiesController < SecuredController
 
   # DELETE /availabilities/1
   def destroy
-    @availability.destroy
+    id = delete_params[:id]
+
+    AvailabilityService::Delete.new(user_id: @user_id, id: id).execute
 
     response = {
       message: 'deleted availability'
     }
 
     render json: response
+  rescue ActiveRecord::RecordNotFound => e
+    response = {
+      message: e.message
+    }
+
+    render json: response, status: :not_found
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_availability
-    @availability = Availability.find(params[:id])
-  end
 
   # Only allow a trusted parameter "white list" through.
   def create_params
@@ -57,6 +59,10 @@ class AvailabilitiesController < SecuredController
 
   def index_params
     params.permit(:from, :to)
+  end
+
+  def delete_params
+    params.permit(:id)
   end
 
   def is_financial_planner
