@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module UserService
-  class Register < ApplicationService
+  class Register
     def initialize(user_id, role)
       @user_id = user_id
       @role = role
     end
 
-    def call
+    def execute
       register
     end
 
