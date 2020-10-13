@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_143002) do
     t.string "client_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["availability_id"], name: "index_appointments_on_availability_id"
+    t.index ["availability_id"], name: "index_appointments_on_availability_id", unique: true
   end
 
   create_table "availabilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
