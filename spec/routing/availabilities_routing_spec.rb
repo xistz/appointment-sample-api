@@ -10,8 +10,8 @@ RSpec.describe AvailabilitiesController, type: :routing do
       expect(post: '/availabilities').to route_to('availabilities#create')
     end
 
-    # it 'routes to #destroy' do
-    #   expect(delete: '/availabilities/1').to route_to('availabilities#destroy', id: '1')
-    # end
+    it 'routes to #destroy' do
+      expect(delete: '/availabilities/1').to route_to('availabilities#destroy', id: '1')
+    end
   end
 end
