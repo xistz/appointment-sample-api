@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :appointments, only: %i[index create destroy]
   resources :availabilities, only: %i[index create destroy]
   get '/ping', to: 'ping#index'
   post '/register', to: 'register#create'
