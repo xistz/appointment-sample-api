@@ -9,6 +9,7 @@ RSpec.describe AppointmentService::Create, type: :model do
     availability_id = AvailabilityService::Create.new(fp_id: fp_id, from: from).execute
 
     expect { AppointmentService::Create.new(client_id: client_id, availability_id: availability_id).execute }.not_to raise_error
+    expect(Appointment.count).to eq 1
   end
 
   it 'returns error when availability does not exist' do
