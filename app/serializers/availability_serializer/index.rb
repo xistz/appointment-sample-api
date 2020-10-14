@@ -1,6 +1,6 @@
 module AvailabilitySerializer
   class Index
-    include FastJsonapi::ObjectSerializer
+    include JSONAPI::Serializer
     attributes :from
   end
 end
