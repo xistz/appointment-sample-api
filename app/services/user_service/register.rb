@@ -2,7 +2,7 @@
 
 module UserService
   class Register
-    def initialize(user_id, role)
+    def initialize(user_id:, role:)
       @user_id = user_id
       @role = role
     end

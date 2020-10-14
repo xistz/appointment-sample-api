@@ -6,7 +6,7 @@ class RegisterController < SecuredController
   def create
     role = new_params[:role]
 
-    UserService::Register.new(@user_id, role).execute
+    UserService::Register.new(user_id: @user_id, role: role).execute
 
     response = {
       message: "registered as a #{role}"
