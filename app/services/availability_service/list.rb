@@ -2,14 +2,14 @@
 
 module AvailabilityService
   class List
-    def initialize(user_id:, from:, to:)
-      @user_id = user_id
+    def initialize(fp_id:, from:, to:)
+      @fp_id = fp_id
       @from = from
       @to = to
     end
 
     def execute
-      availabilities = Availability.where(user_id: @user_id, from: (@from..@to))
+      availabilities = Availability.where(fp_id: @fp_id, from: (@from..@to))
 
       availabilities
     end

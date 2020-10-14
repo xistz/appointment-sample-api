@@ -2,15 +2,15 @@
 
 module AvailabilityService
   class Create
-    def initialize(user_id:, from:)
-      @user_id = user_id
+    def initialize(fp_id:, from:)
+      @fp_id = fp_id
       @from = from
     end
 
     def execute
       is_valid
 
-      availability = Availability.create!(user_id: @user_id, from: @from)
+      availability = Availability.create!(fp_id: @fp_id, from: @from)
 
       availability.id
     end

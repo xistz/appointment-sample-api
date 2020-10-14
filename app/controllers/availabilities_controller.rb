@@ -1,21 +1,25 @@
 class AvailabilitiesController < SecuredController
-  before_action :is_financial_planner, only: [:create]
+  before_action :is_financial_planner, only: %i[index create destroy]
+  before_action :is_client, only: [:search]
 
   # GET /availabilities
   def index
     from = DateTime.parse(index_params[:from])
     to = DateTime.parse(index_params[:to])
 
-    availabilities = AvailabilityService::List.new(user_id: @user_id, from: from, to: to).execute
+    availabilities = AvailabilityService::List.new(fp_id: @user_id, from: from, to: to).execute
 
     render json: AvailabilitySerializer.new(availabilities).serializable_hash
   end
+
+  # GET /availabilities/search
+  def search; end
 
   # POST /availabilities
   def create
     from = DateTime.parse(create_params[:from])
 
-    id = AvailabilityService::Create.new(user_id: @user_id, from: from).execute
+    id = AvailabilityService::Create.new(fp_id: @user_id, from: from).execute
 
     response = {
       id: id,
@@ -35,7 +39,7 @@ class AvailabilitiesController < SecuredController
   def destroy
     id = delete_params[:id]
 
-    AvailabilityService::Delete.new(user_id: @user_id, id: id).execute
+    AvailabilityService::Delete.new(fp_id: @user_id, availability_id: id).execute
 
     response = {
       message: 'deleted availability'
@@ -69,6 +73,16 @@ class AvailabilitiesController < SecuredController
     unless @user_roles.include?('financial planner')
       response = {
         message: 'user is not a financial planner'
+      }
+
+      render json: response, status: :forbidden
+    end
+  end
+
+  def is_client
+    unless @user_roles.include?('client')
+      response = {
+        message: 'user is not a client'
       }
 
       render json: response, status: :forbidden
