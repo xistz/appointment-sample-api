@@ -28,6 +28,7 @@ RSpec.describe AvailabilityService::SearchByDate, type: :model do
 
   it 'excludes times that client has an appointment' do
     AvailabilityService::Create.new(fp_id: 'fp_1', from: from.change(hour: 11, min: 0)).execute
+    AvailabilityService::Create.new(fp_id: 'fp_2', from: from.change(hour: 11, min: 0)).execute
     availability_id = AvailabilityService::Create.new(fp_id: 'fp_2', from: from.change(hour: 17, min: 0)).execute
     AvailabilityService::Create.new(fp_id: 'fp_3', from: from.change(hour: 17, min: 30)).execute
 
