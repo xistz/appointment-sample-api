@@ -13,5 +13,9 @@ RSpec.describe AvailabilitiesController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/availabilities/1').to route_to('availabilities#destroy', id: '1')
     end
+
+    it 'routes to #search' do
+      expect(get: '/availabilities/search').to route_to('availabilities#search')
+    end
   end
 end
