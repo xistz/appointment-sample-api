@@ -13,7 +13,22 @@ class AvailabilitiesController < SecuredController
   end
 
   # GET /availabilities/search
-  def search; end
+  def search
+    from = search_params[:from]
+    to = search_params[:to]
+    at = search_params[:at]
+
+    if from.present? && to.present?
+      availabilities = AvailabilityService::SearchByDate.new(from: from, to: to, client_id: @user_id).execute
+
+      render json: AvailabilitySerializer::SearchByDate.new(availabilities).serializable_hash
+    elsif at.present?
+    else
+      response = { message: 'query by date requires from and to, query by time requires at' }
+
+      render json: response, status: :bad_request
+    end
+  end
 
   # POST /availabilities
   def create
@@ -67,6 +82,10 @@ class AvailabilitiesController < SecuredController
 
   def delete_params
     params.permit(:id)
+  end
+
+  def search_params
+    params.permit(:from, :to, :at)
   end
 
   def is_financial_planner
