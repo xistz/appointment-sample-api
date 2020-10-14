@@ -11,7 +11,9 @@ module AvailabilityService
     def execute
       appointments = AppointmentService::List.new(user_id: @client_id, from: @from, to: @to).execute
 
-      availabilities = Availability.free.where(from: (@from..@to)).where.not(from: appointments.pluck(:from))
+      availabilities = Availability.free.where(from: (@from..@to))
+                                   .where.not(from: appointments.pluck(:from))
+                                   .select(:from).distinct.order(:from)
 
       availabilities
     end
