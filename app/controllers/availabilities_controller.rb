@@ -9,7 +9,7 @@ class AvailabilitiesController < SecuredController
 
     availabilities = AvailabilityService::List.new(fp_id: @user_id, from: from, to: to).execute
 
-    render json: AvailabilitySerializer.new(availabilities).serializable_hash
+    render json: AvailabilitySerializer::Index.new(availabilities).serializable_hash
   end
 
   # GET /availabilities/search
