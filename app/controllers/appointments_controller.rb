@@ -5,7 +5,23 @@ class AppointmentsController < ApplicationController
   def index; end
 
   # POST /appointments
-  def create; end
+  def create
+    availability_id  = create_params[:availability_id]
+
+    AppointmentService::Create.new(client_id: @user_id, availability_id: availability_id)
+
+    response = {
+      message: 'created appointment'
+    }
+
+    render json: response, status: :created
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
+    response = {
+      message: e.message
+    }
+
+    render json: response, status: :bad_request
+  end
 
   # DELETE /appointments/1
   def destroy; end
