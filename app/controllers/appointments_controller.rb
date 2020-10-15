@@ -1,4 +1,4 @@
-class AppointmentsController < ApplicationController
+class AppointmentsController < SecuredController
   before_action :is_client, only: [:create]
 
   # GET /appointments
@@ -8,7 +8,7 @@ class AppointmentsController < ApplicationController
   def create
     availability_id  = create_params[:availability_id]
 
-    AppointmentService::Create.new(client_id: @user_id, availability_id: availability_id)
+    AppointmentService::Create.new(client_id: @user_id, availability_id: availability_id).execute
 
     response = {
       message: 'created appointment'
