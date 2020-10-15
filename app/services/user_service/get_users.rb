@@ -12,14 +12,12 @@ module UserService
     private
 
     def get_users
-      escaped_user_ids = @user_ids.map { |user_id| CGI.escape(user_id) }
-
       url = URI("https://#{ENV['AUTH0_DOMAIN']}/api/v2/users")
       params =  {
         fields: 'user_id,name,picture',
         include_fields: true,
         search_engine: 'v3',
-        q: "(#{escaped_user_ids.join(' OR ')})"
+        q: "user_id:(#{@user_ids.join(' OR ')})"
       }
       url.query = URI.encode_www_form(params)
 
