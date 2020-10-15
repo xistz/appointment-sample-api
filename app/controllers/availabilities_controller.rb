@@ -23,6 +23,12 @@ class AvailabilitiesController < SecuredController
 
       render json: AvailabilitySerializer::SearchByDate.new(availabilities).serializable_hash
     elsif at.present?
+      availabilities = AvailabilityService::SearchByTime.new(at: at).execute
+
+      fp_ids = availabilities.pluck(:fp_id)
+      users = UserService::GetUsers.new(user_ids: fp_ids).execute
+
+      render json: AvailabilitySerializer::SearchByTime.new(availabilities, { params: { users: users } })
     else
       response = { message: 'query by date requires from and to, query by time requires at' }
 
