@@ -14,7 +14,6 @@ class RegisterController < SecuredController
 
     render json: response, status: :created
   rescue StandardError => e
-    puts e
     response = {
       message: e.message
     }
