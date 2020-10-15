@@ -1,4 +1,4 @@
-name: appointment-sample-api workflow
+name: Appointment Sample API workflow
 on:
   push:
     branches:
