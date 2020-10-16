@@ -34,7 +34,23 @@ class AppointmentsController < SecuredController
   end
 
   # DELETE /appointments/1
-  def destroy; end
+  def destroy
+    id = destroy_params[:id]
+
+    AppointmentService::Delete.new(user_id: @user_id, appointment_id: id).execute
+
+    response = {
+      message: 'deleted appointment'
+    }
+
+    render json: response
+  rescue ActiveRecord::RecordNotFound => e
+    response = {
+      message: e.message
+    }
+
+    render json: response, status: :not_found
+  end
 
   private
 
@@ -56,5 +72,9 @@ class AppointmentsController < SecuredController
 
   def index_params
     params.permit(:from, :to)
+  end
+
+  def destroy_params
+    params.permit(:id)
   end
 end
