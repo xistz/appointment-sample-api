@@ -2,11 +2,21 @@ class AppointmentsController < SecuredController
   before_action :is_client, only: [:create]
 
   # GET /appointments
-  def index; end
+  def index
+    from = DateTime.parse(index_params[:from])
+    to = DateTime.parse(index_params[:to])
+
+    appointments = AppointmentService::List.new(user_id: @user_id, from: from, to: to).execute
+
+    user_ids = appointments.pluck(:client_id, :fp_id).flatten
+    users = UserService::GetUsers.new(user_ids: user_ids).execute
+
+    render json: AppointmentSerializer::Index.new(appointments, { params: { users: users } }).serializable_hash
+  end
 
   # POST /appointments
   def create
-    availability_id  = create_params[:availability_id]
+    availability_id = create_params[:availability_id]
 
     AppointmentService::Create.new(client_id: @user_id, availability_id: availability_id).execute
 
@@ -42,5 +52,9 @@ class AppointmentsController < SecuredController
   # Only allow a trusted parameter "white list" through.
   def create_params
     params.require(:appointment).permit(:availability_id)
+  end
+
+  def index_params
+    params.permit(:from, :to)
   end
 end
