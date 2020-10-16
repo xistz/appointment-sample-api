@@ -58,7 +58,7 @@ class AvailabilitiesController < SecuredController
 
   # DELETE /availabilities/1
   def destroy
-    id = delete_params[:id]
+    id = destroy_params[:id]
 
     AvailabilityService::Delete.new(fp_id: @user_id, availability_id: id).execute
 
@@ -86,7 +86,7 @@ class AvailabilitiesController < SecuredController
     params.permit(:from, :to)
   end
 
-  def delete_params
+  def destroy_params
     params.permit(:id)
   end
 
