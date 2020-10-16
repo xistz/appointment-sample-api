@@ -12,6 +12,8 @@ module UserService
     private
 
     def get_users
+      return if @user_ids.blank?
+
       url = URI("https://#{ENV['AUTH0_DOMAIN']}/api/v2/users")
       params =  {
         fields: 'user_id,name,picture',
@@ -32,6 +34,8 @@ module UserService
       body = response.read_body
 
       results = JSON.parse(body)
+
+      puts results
 
       # convert array of users to hash
       users = {}
