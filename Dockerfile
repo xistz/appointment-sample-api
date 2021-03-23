@@ -26,7 +26,7 @@ RUN bundle install --jobs 4 \
 
 COPY . .
 
-FROM ruby:2.7-alpine as deployment
+FROM ruby:2.7-alpine as release
 
 RUN apk --update add mariadb-dev \
   tzdata
