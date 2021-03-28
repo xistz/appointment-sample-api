@@ -106,4 +106,5 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.hosts << "appointment-sample-api"
+  config.hosts << /\A10\.\d+\.\d+\.\d+\z/
 end
