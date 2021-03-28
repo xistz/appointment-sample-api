@@ -43,4 +43,4 @@ USER appointment
 
 WORKDIR /api
 
-CMD [ "bundle", "exec", "rails", "s", "-b", "3000" ]
+CMD [ "bundle", "exec", "rails", "s" ]
