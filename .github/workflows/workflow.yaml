@@ -46,7 +46,7 @@ jobs:
       - build-test
 
     container:
-      image: ${{ secrets.DOCKERHUB_USERNAME }}/appointment-sample-api:development
+      image: xistz/appointment-sample-api:development
       volumes:
         - ${{ github.workspace }}:/api
 
