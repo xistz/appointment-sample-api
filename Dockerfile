@@ -43,4 +43,4 @@ USER appointment
 
 WORKDIR /api
 
-CMD [ "bundle", "exec", "rails", "s" ]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
